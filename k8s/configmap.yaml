@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: billing-service-cfg
+  namespace: zm
+data:
+  # SMTP falso (Service "maildev" do cluster, porta 1025)
+  MAIL_SERVER_ADDRESS: "maildev"
+  # Link que vai no e-mail de aprovação. 192.168.49.2 é o IP padrão do minikube
+  # (driver docker); confira com "minikube ip".
+  BILLING_PUBLIC_URL: "http://192.168.49.2:30082"
+  # approved | rejected. Para simular recusa sem redeploy:
+  #   kubectl set env deployment/billing-service MOCK_PAGAMENTO_STATUS=rejected -n zm
+  MOCK_PAGAMENTO_STATUS: "approved"

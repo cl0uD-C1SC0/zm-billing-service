@@ -1,0 +1,15 @@
+# Dentro do cluster: http://billing-service:8000
+# De fora (na VM):   http://$(minikube ip):30082/docs  (também é o link do e-mail de aprovação)
+apiVersion: v1
+kind: Service
+metadata:
+  name: billing-service
+  namespace: zm
+spec:
+  type: NodePort
+  selector:
+    app: billing-service
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30082
